@@ -3,7 +3,8 @@
 Renders `heatmap/heatmap.svg` (public commits, forks included) and keeps it current: `watch.ts`
 notices a new public push within about a minute, waits 20 s for pushes to settle, rebuilds the
 image, and pushes it as `heatmap-bot` (an identity not linked to the account, so its commits are
-never counted).
+never counted). It also pushes at the top of every hour so the current-hour markers stay right
+with no commits.
 
 ## Server setup
 
@@ -35,10 +36,12 @@ Re-run `install.ps1` if your Windows password changes. Set `HEATMAP_TZ` to chang
 ## Behavior
 
 - Polls `/users/<you>/repos?sort=pushed` every 30 s with an ETag; unchanged answers (304) are free.
-- Hourly full check catches commits to other people's repos.
-- Pushes only when the set of your commits changed (SHA fingerprint), so the bot's own push ends
-  in "no new commits".
-- One run at a time; pushes during a run queue one follow-up run. Errors retry after 5 min.
+- Each new hour in `HEATMAP_TZ` queues a run. It's a full rebuild, so it also catches commits to
+  other people's repos and missed polls.
+- Commits only when the image differs from the committed one. The image depends only on your
+  commits and the current hour, so the bot's own push ends in "image unchanged".
+- Pushes and hour changes share one queue: one run at a time, and anything that happens during a
+  run queues one follow-up run. Errors retry after 5 min.
 - No network at boot is fine: polls log the failure and keep retrying. The task also relaunches the
   watcher within 5 minutes if the process ever exits.
 - State and log: `%LOCALAPPDATA%\heatmap\` (`state.json`, `heatmap.log`, rotated at 1 MB).

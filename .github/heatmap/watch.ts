@@ -1,6 +1,8 @@
 // Keeps heatmap/heatmap.svg current. Polls GitHub for the user's latest public push (ETag requests,
-// free when nothing changed), waits for pushes to settle, then rebuilds and pushes the image.
-// One run at a time; pushes during a run queue exactly one follow-up run.
+// free when nothing changed), waits for pushes to settle, then rebuilds and pushes the image. Each
+// new hour in HEATMAP_TZ also queues a run, so the "now" markers advance with no commits.
+// All triggers set one pending flag: one run at a time, and anything during a run queues one more.
+// A run commits only when the image differs, so overlapping triggers never double-commit.
 //   node watch.ts           watch forever (what the scheduled task runs)
 //   node watch.ts --once    one run now, then exit
 //   --dry                   skip git (local testing)
@@ -10,11 +12,11 @@ import { execFileSync } from 'node:child_process';
 import { appendFileSync, existsSync, mkdirSync, readFileSync, renameSync, statSync, writeFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { build } from './build.ts';
+import { hourKey } from './collect.ts';
 
 const _POLL_MS = 30_000;
 const _QUIET_MS = 20_000; // Wait this long after the last detected push before running.
 const _RETRY_MS = 5 * 60_000;
-const _FALLBACK_MS = 60 * 60_000; // Catches commits to others' repos and missed polls.
 const _LOG_MAX = 1_000_000;
 const _BOT = ['-c', 'user.name=heatmap-bot', '-c', 'user.email=heatmap-bot@localhost'];
 
@@ -27,7 +29,7 @@ const timeZone = process.env.HEATMAP_TZ || 'America/New_York';
 const once = process.argv.includes('--once');
 const dry = process.argv.includes('--dry');
 
-type State = { fp?: string; etag?: string; pushedAt?: string };
+type State = { etag?: string; pushedAt?: string };
 
 mkdirSync(stateDir, { recursive: true });
 const state: State = existsSync(statePath) ? JSON.parse(readFileSync(statePath, 'utf8')) : {};
@@ -47,32 +49,26 @@ const git = (...args: string[]) => execFileSync('git', ['-C', root, ...args], { 
 let login = '';
 const getLogin = () => (login ||= gh('api', 'user', '--jq', '.login'));
 
-// Rebuilds the image; commits and pushes only when the user's commit set changed.
+// Rebuilds the image; commits and pushes only when it differs from the committed one (new commits
+// or a new hour).
 async function run(): Promise<void> {
   if (!dry) git('pull', '--rebase', '--autostash'); // Autostash: a half-finished run can't wedge pulls.
-  const { fp, svg } = await build(gh('auth', 'token'), getLogin(), timeZone);
-  if (fp === state.fp) {
-    log('no new commits');
+  writeFileSync(svgPath, await build(gh('auth', 'token'), getLogin(), timeZone));
+  if (dry) {
+    log('rendered (dry run, no git)');
     return;
   }
-  writeFileSync(svgPath, svg);
-  let result = 'rendered (dry run, no git)';
-  if (!dry) {
-    git('add', 'heatmap/heatmap.svg');
-    const changed = git('status', '--porcelain', '--', 'heatmap/heatmap.svg') !== '';
-    if (changed) git(..._BOT, 'commit', '-m', 'Update heatmap');
-    // Push even without a new commit: a bot commit left unpushed by a failed run goes out here.
-    try {
-      git('push');
-    } catch {
-      git('pull', '--rebase', '--autostash'); // Someone pushed meanwhile; replay the bot commit once.
-      git('push');
-    }
-    result = changed ? `pushed ${git('rev-parse', '--short', 'HEAD')}` : 'image unchanged';
+  git('add', 'heatmap/heatmap.svg');
+  const changed = git('status', '--porcelain', '--', 'heatmap/heatmap.svg') !== '';
+  if (changed) git(..._BOT, 'commit', '-m', 'Update heatmap');
+  // Push even without a new commit: a bot commit left unpushed by a failed run goes out here.
+  try {
+    git('push');
+  } catch {
+    git('pull', '--rebase', '--autostash'); // Someone pushed meanwhile; replay the bot commit once.
+    git('push');
   }
-  state.fp = fp;
-  saveState();
-  log(result);
+  log(changed ? `pushed ${git('rev-parse', '--short', 'HEAD')}` : 'image unchanged');
 }
 
 if (once) {
@@ -86,6 +82,7 @@ if (once) {
   let pending = true; // Catch up on anything missed while stopped.
   let notBefore = 0;
   let running = false;
+  let hour = hourKey(new Date(), timeZone);
 
   const queue = (delay: number) => {
     pending = true;
@@ -113,7 +110,15 @@ if (once) {
     }
   };
 
+  // Hour check comes first so a new hour during a run still queues its follow-up. Comparing hour
+  // keys in the user's timezone (not a timer) survives DST, clock changes, and sleep.
   const tick = async () => {
+    const now = hourKey(new Date(), timeZone);
+    if (now !== hour) {
+      hour = now;
+      log(`new hour: ${now}:00`);
+      queue(0);
+    }
     if (!pending || running || Date.now() < notBefore) return;
     pending = false;
     running = true;
@@ -130,6 +135,5 @@ if (once) {
   log(`watching${dry ? ' (dry run)' : ''}`);
   await poll();
   setInterval(poll, _POLL_MS);
-  setInterval(() => queue(0), _FALLBACK_MS);
   setInterval(tick, 1000);
 }

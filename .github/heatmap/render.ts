@@ -71,9 +71,12 @@ const svgOpen = (width: number, height: number) =>
 const futureRect = (x: number, y: number, size: number) =>
   `<rect x="${x + 0.5}" y="${y + 0.5}" width="${size - 1}" height="${size - 1}" rx="3" fill="none" stroke="${_COLORS.levels[0]}"/>`;
 
-// Ring just outside a cell; visible on every level color.
-const todayRing = (x: number, y: number, size: number) =>
-  `<rect x="${x - 2}" y="${y - 2}" width="${size + 4}" height="${size + 4}" rx="4" fill="none" stroke="${_COLORS.focus}" stroke-width="1.5"/>`;
+// Ring just outside the current slot's cell; visible on every level color. Small year cells get a
+// tighter, thinner ring so it stays inside their 3px gap.
+function todayRing(x: number, y: number, size: number) {
+  const [pad, width] = size > _CELL ? [2, 1.5] : [1.5, 1];
+  return `<rect x="${x - pad}" y="${y - pad}" width="${size + 2 * pad}" height="${size + 2 * pad}" rx="${(size > _CELL ? 3 : 2) + pad}" fill="none" stroke="${_COLORS.focus}" stroke-width="${width}"/>`;
+}
 
 // Hour views share thresholds from every hour in the year, so day and week shades agree.
 const hourLevel = (hours: Map<string, number>) => levelOf([...hours.values()]);
@@ -107,6 +110,7 @@ function hourRow(hours: Map<string, number>, level: (n: number) => number, date:
     const n = hours.get(key) ?? 0;
     total += n;
     rects.push(dayRect(x, y, _D_CELL, _COLORS.levels[level(n)], `${plural(n)} on ${date}, ${hourLabel(h)}m`));
+    if (key === now) rects.push(todayRing(x, y, _D_CELL));
   }
   return { rects, total };
 }
@@ -244,7 +248,8 @@ function yearSection(days: Map<string, number>, today: string): Section {
     .map((fill, i) => `<rect x="${legendX(i)}" y="${legendY}" width="${_CELL}" height="${_CELL}" rx="2" fill="${fill}"/>`)
     .join('');
   const rects = cells
-    .map((c) => dayRect(c.x, c.y, _CELL, _COLORS.levels[level(c.n)], `${plural(c.n)} on ${c.date}`))
+    .map((c) => dayRect(c.x, c.y, _CELL, _COLORS.levels[level(c.n)], `${plural(c.n)} on ${c.date}`)
+      + (c.date === today ? todayRing(c.x, c.y, _CELL) : ''))
     .join('\n');
   const weekday = (label: string, row: number) => `<text x="${_PAD}" y="${_TOP + row * _STEP + 9}">${label}</text>`;
 
