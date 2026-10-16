@@ -1,6 +1,6 @@
 # heatmap
 
-Renders `heatmap/heatmap.svg` (public commits, forks included) and keeps it current: `watch.ts`
+Renders `heatmap/heatmap-<hash>.svg` (public commits, forks included) and keeps it current: `watch.ts`
 notices a new public push within about a minute, waits 20 s for pushes to settle, rebuilds the
 image, and pushes it as `heatmap-bot` (an identity not linked to the account, so its commits are
 never counted). It also pushes at the top of every hour so the current-hour markers stay right
@@ -25,12 +25,12 @@ Get-ScheduledTask heatmap | Select-Object State                    # is it runni
 C:\heatmap\fosterbarnes\.github\heatmap\install.ps1 -Uninstall     # remove
 ```
 
-The watcher pulls before every run, so other repo changes (like the profile `README.md`) need
-nothing on the server. After changing files in this folder, push, then restart the task
-(`Stop-ScheduledTask heatmap; Start-ScheduledTask heatmap`): a running process keeps its old code.
-After a force-push, sync the server with `git -C C:\heatmap\fosterbarnes fetch` and
-`git -C C:\heatmap\fosterbarnes reset --hard origin/main`, then restart the task.
-Re-run `install.ps1` if your Windows password changes. Set `HEATMAP_TZ` to change the time zone
+Every run resets the server clone to `origin/main` (`fetch` + `reset --hard`), so other repo
+changes and force-pushes need nothing on the server, and edits made by hand in
+`C:\heatmap\fosterbarnes` are wiped. After changing files in this folder, push, then restart the
+task (`Stop-ScheduledTask heatmap; Start-ScheduledTask heatmap`): a running process keeps its old
+code. The bot rewrites the heatmap `<img src>` line in the profile `README.md` on every update, so
+pull before editing the README locally. Re-run `install.ps1` if your Windows password changes. Set `HEATMAP_TZ` to change the time zone
 (default `America/New_York`).
 
 ## Behavior
@@ -41,8 +41,10 @@ Re-run `install.ps1` if your Windows password changes. Set `HEATMAP_TZ` to chang
 - Commits only when the image differs from the committed one. The image depends only on your
   commits and the current hour, so the bot's own push ends in "image unchanged".
 - Pushes and hour changes share one queue: one run at a time, and anything that happens during a
-  run queues one follow-up run. Errors retry after 5 min.
+  run queues one follow-up run. A rejected push re-syncs and retries once; errors retry after 5 min.
 - No network at boot is fine: polls log the failure and keep retrying. The task also relaunches the
   watcher within 5 minutes if the process ever exits.
 - State and log: `%LOCALAPPDATA%\heatmap\` (`state.json`, `heatmap.log`, rotated at 1 MB).
-- GitHub caches the image up to 5 min, so the profile can lag a push by that much.
+- Each image is named after a hash of its content and the profile `README.md` points at it.
+  GitHub serves the image from a URL with a 5 min cache and its redirect drops query strings
+  (`?v=` does nothing), so a new file name is what makes browsers fetch the new image.
