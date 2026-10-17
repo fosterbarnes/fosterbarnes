@@ -562,8 +562,8 @@
 <rect x="716" y="180" width="16" height="16" rx="3" fill="#2A2A2A"><title>0 commits on 2026-10-16, 11pm</title></rect>
 <rect x="256" y="200" width="16" height="16" rx="3" fill="#2A2A2A"><title>0 commits on 2026-10-17, 12am</title></rect>
 <rect x="276" y="200" width="16" height="16" rx="3" fill="#2A2A2A"><title>0 commits on 2026-10-17, 1am</title></rect>
-<rect x="274" y="198" width="20" height="20" rx="5" fill="none" stroke="#AC98C7" stroke-width="1.5"/>
-<rect x="296.5" y="200.5" width="15" height="15" rx="3" fill="none" stroke="#2A2A2A"/>
+<rect x="296" y="200" width="16" height="16" rx="3" fill="#2A2A2A"><title>0 commits on 2026-10-17, 2am</title></rect>
+<rect x="294" y="198" width="20" height="20" rx="5" fill="none" stroke="#AC98C7" stroke-width="1.5"/>
 <rect x="316.5" y="200.5" width="15" height="15" rx="3" fill="none" stroke="#2A2A2A"/>
 <rect x="336.5" y="200.5" width="15" height="15" rx="3" fill="none" stroke="#2A2A2A"/>
 <rect x="356.5" y="200.5" width="15" height="15" rx="3" fill="none" stroke="#2A2A2A"/>
@@ -591,8 +591,8 @@
 <g fill="#888888"><text x="256" y="256">12am</text><text x="376" y="256">6am</text><text x="496" y="256">12pm</text><text x="616" y="256">6pm</text></g>
 <rect x="256" y="264" width="16" height="16" rx="3" fill="#2A2A2A"><title>0 commits on 2026-10-17, 12am</title></rect>
 <rect x="276" y="264" width="16" height="16" rx="3" fill="#2A2A2A"><title>0 commits on 2026-10-17, 1am</title></rect>
-<rect x="274" y="262" width="20" height="20" rx="5" fill="none" stroke="#AC98C7" stroke-width="1.5"/>
-<rect x="296.5" y="264.5" width="15" height="15" rx="3" fill="none" stroke="#2A2A2A"/>
+<rect x="296" y="264" width="16" height="16" rx="3" fill="#2A2A2A"><title>0 commits on 2026-10-17, 2am</title></rect>
+<rect x="294" y="262" width="20" height="20" rx="5" fill="none" stroke="#AC98C7" stroke-width="1.5"/>
 <rect x="316.5" y="264.5" width="15" height="15" rx="3" fill="none" stroke="#2A2A2A"/>
 <rect x="336.5" y="264.5" width="15" height="15" rx="3" fill="none" stroke="#2A2A2A"/>
 <rect x="356.5" y="264.5" width="15" height="15" rx="3" fill="none" stroke="#2A2A2A"/>
