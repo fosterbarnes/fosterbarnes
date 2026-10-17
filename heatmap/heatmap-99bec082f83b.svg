@@ -561,8 +561,8 @@
 <rect x="696" y="180" width="16" height="16" rx="3" fill="#4D3C64"><title>1 commit on 2026-10-16, 10pm</title></rect>
 <rect x="716" y="180" width="16" height="16" rx="3" fill="#2A2A2A"><title>0 commits on 2026-10-16, 11pm</title></rect>
 <rect x="256" y="200" width="16" height="16" rx="3" fill="#2A2A2A"><title>0 commits on 2026-10-17, 12am</title></rect>
-<rect x="254" y="198" width="20" height="20" rx="5" fill="none" stroke="#AC98C7" stroke-width="1.5"/>
-<rect x="276.5" y="200.5" width="15" height="15" rx="3" fill="none" stroke="#2A2A2A"/>
+<rect x="276" y="200" width="16" height="16" rx="3" fill="#2A2A2A"><title>0 commits on 2026-10-17, 1am</title></rect>
+<rect x="274" y="198" width="20" height="20" rx="5" fill="none" stroke="#AC98C7" stroke-width="1.5"/>
 <rect x="296.5" y="200.5" width="15" height="15" rx="3" fill="none" stroke="#2A2A2A"/>
 <rect x="316.5" y="200.5" width="15" height="15" rx="3" fill="none" stroke="#2A2A2A"/>
 <rect x="336.5" y="200.5" width="15" height="15" rx="3" fill="none" stroke="#2A2A2A"/>
@@ -590,8 +590,8 @@
 <text x="16" y="277" font-size="14" fill="#D0D0D0"><tspan font-family="Consolas,'SFMono-Regular',Menlo,monospace" font-weight="600" fill="#F7E9B5">0</tspan> commits on Oct 17</text>
 <g fill="#888888"><text x="256" y="256">12am</text><text x="376" y="256">6am</text><text x="496" y="256">12pm</text><text x="616" y="256">6pm</text></g>
 <rect x="256" y="264" width="16" height="16" rx="3" fill="#2A2A2A"><title>0 commits on 2026-10-17, 12am</title></rect>
-<rect x="254" y="262" width="20" height="20" rx="5" fill="none" stroke="#AC98C7" stroke-width="1.5"/>
-<rect x="276.5" y="264.5" width="15" height="15" rx="3" fill="none" stroke="#2A2A2A"/>
+<rect x="276" y="264" width="16" height="16" rx="3" fill="#2A2A2A"><title>0 commits on 2026-10-17, 1am</title></rect>
+<rect x="274" y="262" width="20" height="20" rx="5" fill="none" stroke="#AC98C7" stroke-width="1.5"/>
 <rect x="296.5" y="264.5" width="15" height="15" rx="3" fill="none" stroke="#2A2A2A"/>
 <rect x="316.5" y="264.5" width="15" height="15" rx="3" fill="none" stroke="#2A2A2A"/>
 <rect x="336.5" y="264.5" width="15" height="15" rx="3" fill="none" stroke="#2A2A2A"/>
