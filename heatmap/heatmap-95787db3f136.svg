@@ -583,8 +583,8 @@
 <rect x="656" y="200" width="16" height="16" rx="3" fill="#2A2A2A"><title>0 commits on 2026-10-17, 8pm</title></rect>
 <rect x="676" y="200" width="16" height="16" rx="3" fill="#2A2A2A"><title>0 commits on 2026-10-17, 9pm</title></rect>
 <rect x="696" y="200" width="16" height="16" rx="3" fill="#2A2A2A"><title>0 commits on 2026-10-17, 10pm</title></rect>
-<rect x="694" y="198" width="20" height="20" rx="5" fill="none" stroke="#AC98C7" stroke-width="1.5"/>
-<rect x="716.5" y="200.5" width="15" height="15" rx="3" fill="none" stroke="#2A2A2A"/>
+<rect x="716" y="200" width="16" height="16" rx="3" fill="#2A2A2A"><title>0 commits on 2026-10-17, 11pm</title></rect>
+<rect x="714" y="198" width="20" height="20" rx="5" fill="none" stroke="#AC98C7" stroke-width="1.5"/>
 <line x1="16" y1="232" x2="732" y2="232" stroke="#3F3F3F"/>
 <text x="16" y="256" font-size="14" font-weight="600" fill="#FFFFFF">Today</text>
 <text x="16" y="277" font-size="14" fill="#D0D0D0"><tspan font-family="Consolas,'SFMono-Regular',Menlo,monospace" font-weight="600" fill="#F7E9B5">1</tspan> commits on Oct 17</text>
@@ -612,7 +612,7 @@
 <rect x="656" y="264" width="16" height="16" rx="3" fill="#2A2A2A"><title>0 commits on 2026-10-17, 8pm</title></rect>
 <rect x="676" y="264" width="16" height="16" rx="3" fill="#2A2A2A"><title>0 commits on 2026-10-17, 9pm</title></rect>
 <rect x="696" y="264" width="16" height="16" rx="3" fill="#2A2A2A"><title>0 commits on 2026-10-17, 10pm</title></rect>
-<rect x="694" y="262" width="20" height="20" rx="5" fill="none" stroke="#AC98C7" stroke-width="1.5"/>
-<rect x="716.5" y="264.5" width="15" height="15" rx="3" fill="none" stroke="#2A2A2A"/>
+<rect x="716" y="264" width="16" height="16" rx="3" fill="#2A2A2A"><title>0 commits on 2026-10-17, 11pm</title></rect>
+<rect x="714" y="262" width="20" height="20" rx="5" fill="none" stroke="#AC98C7" stroke-width="1.5"/>
 </g>
 </svg>
