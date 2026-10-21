@@ -6,7 +6,7 @@ const _COLORS = {
   panel: '#1B1B1B', // AppBackground
   border: '#3F3F3F', // BorderSubtle
   // ControlAlt for none, then even steps from a light lavender (fewest) to a mid purple (most).
-  levels: ['#2A2A2A', '#B8A7D0', '#9E8BBB', '#856FA6', '#6B5491'],
+  levels: ['#2A2A2A', '#B8A7D0', '#A996C3', '#9986B7', '#8A75AA', '#7A659E', '#6B5491'],
   focus: '#AC98C7', // Focus: marks today
   count: '#F7E9B5', // Highlight
   heading: '#FFFFFF', // PrimaryText: section labels
@@ -32,12 +32,13 @@ const shortDate = (iso: string) => `${_MONTHS[Number(iso.slice(5, 7)) - 1]} ${Nu
 const dateRange = (from: string, to: string) =>
   from.slice(5, 7) === to.slice(5, 7) ? `${shortDate(from)}-${Number(to.slice(8))}` : `${shortDate(from)} - ${shortDate(to)}`;
 
-// Level 1-4 thresholds from quartiles of non-zero days.
+// Non-zero counts map to levels 1..top on a log curve from 1 up to the 95th percentile of non-zero
+// counts, so most of the range stays distinct and one huge outlier can't flatten the rest.
 function levelOf(counts: number[]): (n: number) => number {
   const sorted = counts.filter((n) => n > 0).sort((a, b) => a - b);
-  const q = (p: number) => sorted[Math.floor((sorted.length - 1) * p)] ?? 0;
-  const [q1, q2, q3] = [q(0.25), q(0.5), q(0.75)];
-  return (n) => (n <= 0 ? 0 : n <= q1 ? 1 : n <= q2 ? 2 : n <= q3 ? 3 : 4);
+  const cap = Math.max(2, sorted[Math.floor((sorted.length - 1) * 0.95)] ?? 0);
+  const top = _COLORS.levels.length - 1;
+  return (n) => (n <= 0 ? 0 : Math.min(top, 1 + Math.floor(((top - 1) * Math.log(n)) / Math.log(cap))));
 }
 
 // Every date from the yearly graph's first Sunday through `today`.
@@ -65,7 +66,7 @@ const dayRect = (x: number, y: number, size: number, fill: string, tip: string, 
 function countText(x: number, y: number, size: number, n: number, level: number, h = size) {
   if (n <= 0) return '';
   const font = size > _D_CELL ? 11 : n > 99 ? 7.5 : 9;
-  const fill = level <= 2 ? _COLORS.panel : _COLORS.heading;
+  const fill = level <= 4 ? _COLORS.panel : _COLORS.heading;
   return `<text x="${x + size / 2}" y="${y + h / 2 + font * 0.35}" text-anchor="middle" font-family="${_MONO}" font-size="${font}" font-weight="600" fill="${fill}">${n}</text>`;
 }
 
@@ -281,7 +282,7 @@ function yearSection(days: Map<string, number>, today: string): Section {
   const right = _WIDTH - _PAD;
   const legendY = _TOP + 7 * _STEP + 10;
   const height = legendY + _CELL + _PAD;
-  const legendX = (i: number) => right - 30 - _CELL - (4 - i) * _STEP;
+  const legendX = (i: number) => right - 30 - _CELL - (_COLORS.levels.length - 1 - i) * _STEP;
   const legend = _COLORS.levels
     .map((fill, i) => `<rect x="${legendX(i)}" y="${legendY}" width="${_CELL}" height="${_CELL}" rx="2" fill="${fill}"/>`)
     .join('');
