@@ -55,16 +55,17 @@ const yearLevel = (days: Map<string, number>, today: string) =>
 
 const plural = (n: number) => `${n} commit${n === 1 ? '' : 's'}`;
 
-const dayRect = (x: number, y: number, size: number, fill: string, tip: string) =>
-  `<rect x="${x}" y="${y}" width="${size}" height="${size}" rx="${size > _CELL ? 3 : 2}" fill="${fill}"><title>${tip}</title></rect>`;
+// Cells are `size` wide and `h` tall; only today's hour row is wider than tall.
+const dayRect = (x: number, y: number, size: number, fill: string, tip: string, h = size) =>
+  `<rect x="${x}" y="${y}" width="${size}" height="${h}" rx="${size > _CELL ? 3 : 2}" fill="${fill}"><title>${tip}</title></rect>`;
 
 // Commit count centered in a detail cell: dark text on the two light levels, none for zero. The README
 // shows the image through <img>, where <title> tooltips never appear, so counts must be drawn.
-function countText(x: number, y: number, size: number, n: number, level: number) {
+function countText(x: number, y: number, size: number, n: number, level: number, h = size) {
   if (n <= 0) return '';
   const font = size > _D_CELL ? 11 : n > 99 ? 7.5 : 9;
   const fill = level >= 3 ? _COLORS.panel : _COLORS.heading;
-  return `<text x="${x + size / 2}" y="${y + size / 2 + font * 0.35}" text-anchor="middle" font-family="${_MONO}" font-size="${font}" font-weight="600" fill="${fill}">${n}</text>`;
+  return `<text x="${x + size / 2}" y="${y + h / 2 + font * 0.35}" text-anchor="middle" font-family="${_MONO}" font-size="${font}" font-weight="600" fill="${fill}">${n}</text>`;
 }
 
 const panel = (width: number, height: number) =>
@@ -77,14 +78,14 @@ const svgOpen = (width: number, height: number) =>
   `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" font-family="${_FONT}" font-size="11">`;
 
 // Outline for a slot that hasn't happened yet.
-const futureRect = (x: number, y: number, size: number) =>
-  `<rect x="${x + 0.5}" y="${y + 0.5}" width="${size - 1}" height="${size - 1}" rx="3" fill="none" stroke="${_COLORS.levels[0]}"/>`;
+const futureRect = (x: number, y: number, size: number, h = size) =>
+  `<rect x="${x + 0.5}" y="${y + 0.5}" width="${size - 1}" height="${h - 1}" rx="3" fill="none" stroke="${_COLORS.levels[0]}"/>`;
 
 // Ring just outside the current slot's cell; visible on every level color. Small year cells get a
 // tighter, thinner ring so it stays inside their 3px gap.
-function todayRing(x: number, y: number, size: number) {
+function todayRing(x: number, y: number, size: number, h = size) {
   const [pad, width] = size > _CELL ? [2, 1.5] : [1.5, 1];
-  return `<rect x="${x - pad}" y="${y - pad}" width="${size + 2 * pad}" height="${size + 2 * pad}" rx="${(size > _CELL ? 3 : 2) + pad}" fill="none" stroke="${_COLORS.focus}" stroke-width="${width}"/>`;
+  return `<rect x="${x - pad}" y="${y - pad}" width="${size + 2 * pad}" height="${h + 2 * pad}" rx="${(size > _CELL ? 3 : 2) + pad}" fill="none" stroke="${_COLORS.focus}" stroke-width="${width}"/>`;
 }
 
 // Hour views share thresholds from every hour in the year, so day and week shades agree.
@@ -105,23 +106,31 @@ const _HOURS_X = _WIDTH - _PAD - (24 * _D_STEP - 4); // Week and day hour column
 const _WEEK_X = _HOURS_X - 32; // Week title and day labels.
 const _W_DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
+// Hour column layouts: the week's square cells, and today's row stretched across the full panel.
+type HourCols = { x: number; step: number; width: number };
+const _WEEK_COLS: HourCols = { x: _HOURS_X, step: _D_STEP, width: _D_CELL };
+const _DAY_STEP = (_WIDTH - 2 * _PAD + _D_STEP - _D_CELL) / 24;
+const _DAY_COLS: HourCols = { x: _PAD, step: _DAY_STEP, width: _DAY_STEP - (_D_STEP - _D_CELL) };
+
 // One row of 24 hour cells for `date`; hours after `now` ("YYYY-MM-DD HH") show as outlines.
-function hourRow(hours: Map<string, number>, level: (n: number) => number, date: string, now: string, y: number) {
+function hourRow(
+  hours: Map<string, number>, level: (n: number) => number, date: string, now: string, y: number, cols = _WEEK_COLS,
+) {
   const rects: string[] = [];
   let total = 0;
   for (let h = 0; h < 24; h++) {
     const key = `${date} ${String(h).padStart(2, '0')}`;
-    const x = _HOURS_X + h * _D_STEP;
+    const x = cols.x + h * cols.step;
     if (key > now) {
-      rects.push(futureRect(x, y, _D_CELL));
+      rects.push(futureRect(x, y, cols.width, _D_CELL));
       continue;
     }
     const n = hours.get(key) ?? 0;
     total += n;
     const lvl = level(n);
-    rects.push(dayRect(x, y, _D_CELL, _COLORS.levels[lvl], `${plural(n)} on ${date}, ${hourLabel(h)}m`));
-    rects.push(countText(x, y, _D_CELL, n, lvl));
-    if (key === now) rects.push(todayRing(x, y, _D_CELL));
+    rects.push(dayRect(x, y, cols.width, _COLORS.levels[lvl], `${plural(n)} on ${date}, ${hourLabel(h)}m`, _D_CELL));
+    rects.push(countText(x, y, cols.width, n, lvl, _D_CELL));
+    if (key === now) rects.push(todayRing(x, y, cols.width, _D_CELL));
   }
   return { rects, total };
 }
@@ -130,14 +139,15 @@ function hourRow(hours: Map<string, number>, level: (n: number) => number, date:
 const hourHeader = (y: number) =>
   [0, 6, 12, 18].map((h) => `<text x="${_HOURS_X + h * _D_STEP}" y="${y}">${hourLabel(h)}m</text>`).join('');
 
-// Every hour centered over its column ("12a 1 ... 11 12p 1 ... 11"). The 6-hour marks use the text
-// color and the current hour (`now` is "YYYY-MM-DD HH") the highlight color.
+// Every hour centered over today's columns ("12am 1:00 ... 11:00 12pm 1:00 ... 11:00"). The 6-hour
+// marks use the text color and the current hour (`now` is "YYYY-MM-DD HH") the highlight color.
 function fullHourHeader(y: number, now: string) {
   const current = Number(now.slice(11));
   const labels: string[] = [];
   for (let h = 0; h < 24; h++) {
     const fill = h === current ? _COLORS.count : h % 6 === 0 ? _COLORS.text : '';
-    labels.push(`<text x="${_HOURS_X + h * _D_STEP + _D_CELL / 2}" y="${y}"${fill && ` fill="${fill}"`}>${h % 12 ? h % 12 : hourLabel(h)}</text>`);
+    const x = _DAY_COLS.x + h * _DAY_COLS.step + _DAY_COLS.width / 2;
+    labels.push(`<text x="${x}" y="${y}"${fill && ` fill="${fill}"`}>${h % 12 ? `${h % 12}:00` : `${hourLabel(h)}m`}</text>`);
   }
   return `<g font-size="10" text-anchor="middle">${labels.join('')}</g>`;
 }
@@ -206,13 +216,15 @@ ${title(total, `commits, ${dateRange(dates[0], dates[6])}`, _WEEK_X, _D_TITLE_Y)
 ${rects.join('\n')}`;
 }
 
-// Today by hour under a divider, its columns aligned with the week's.
+const _DAY_CELLS_Y = _D_TITLE_Y + 32; // Today's hour row, below its label, title, and hour labels.
+
+// Today by hour under a divider; its title sits above so the row can span the full panel width.
 function dayBlock(hours: Map<string, number>, level: (n: number) => number, now: string, top: number): string {
-  const cellsY = top + 32;
-  const { rects, total } = hourRow(hours, level, now.slice(0, 10), now, cellsY);
+  const cellsY = top + _DAY_CELLS_Y;
+  const { rects, total } = hourRow(hours, level, now.slice(0, 10), now, cellsY, _DAY_COLS);
   return `<line x1="${_PAD}" y1="${top}" x2="${_WIDTH - _PAD}" y2="${top}" stroke="${_COLORS.border}"/>
-${label('Today', _PAD, cellsY - 8)}
-${title(total, `commits on ${shortDate(now.slice(0, 10))}`, _PAD, cellsY + 13)}
+${label('Today', _PAD, top + _PAD + 12)}
+${title(total, `commits on ${shortDate(now.slice(0, 10))}`, _PAD, top + _D_TITLE_Y)}
 <g fill="${_COLORS.muted}">${fullHourHeader(cellsY - 8, now)}</g>
 ${rects.join('\n')}`;
 }
@@ -226,7 +238,7 @@ function detailSection(days: Map<string, number>, hours: Map<string, number>, no
   const body = `${monthBlock(days, now.slice(0, 10))}
 ${weekBlock(hours, level, now)}
 ${dayBlock(hours, level, now, divider)}`;
-  return { body, height: divider + 32 + _D_CELL + _PAD };
+  return { body, height: divider + _DAY_CELLS_Y + _D_CELL + _PAD };
 }
 
 // One panel: the year grid on top, then month/week/day below a divider.
