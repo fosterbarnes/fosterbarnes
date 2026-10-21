@@ -58,6 +58,15 @@ const plural = (n: number) => `${n} commit${n === 1 ? '' : 's'}`;
 const dayRect = (x: number, y: number, size: number, fill: string, tip: string) =>
   `<rect x="${x}" y="${y}" width="${size}" height="${size}" rx="${size > _CELL ? 3 : 2}" fill="${fill}"><title>${tip}</title></rect>`;
 
+// Commit count centered in a detail cell: dark text on the two light levels, none for zero. The README
+// shows the image through <img>, where <title> tooltips never appear, so counts must be drawn.
+function countText(x: number, y: number, size: number, n: number, level: number) {
+  if (n <= 0) return '';
+  const font = size > _D_CELL ? 11 : n > 99 ? 7.5 : 9;
+  const fill = level >= 3 ? _COLORS.panel : _COLORS.heading;
+  return `<text x="${x + size / 2}" y="${y + size / 2 + font * 0.35}" text-anchor="middle" font-family="${_MONO}" font-size="${font}" fill="${fill}">${n}</text>`;
+}
+
 const panel = (width: number, height: number) =>
   `<rect x="0.5" y="0.5" width="${width - 1}" height="${height - 1}" rx="4" fill="${_COLORS.panel}" stroke="${_COLORS.border}"/>`;
 
@@ -109,7 +118,9 @@ function hourRow(hours: Map<string, number>, level: (n: number) => number, date:
     }
     const n = hours.get(key) ?? 0;
     total += n;
-    rects.push(dayRect(x, y, _D_CELL, _COLORS.levels[level(n)], `${plural(n)} on ${date}, ${hourLabel(h)}m`));
+    const lvl = level(n);
+    rects.push(dayRect(x, y, _D_CELL, _COLORS.levels[lvl], `${plural(n)} on ${date}, ${hourLabel(h)}m`));
+    rects.push(countText(x, y, _D_CELL, n, lvl));
     if (key === now) rects.push(todayRing(x, y, _D_CELL));
   }
   return { rects, total };
@@ -118,6 +129,18 @@ function hourRow(hours: Map<string, number>, level: (n: number) => number, date:
 // Hour labels every 6 hours above the hour columns.
 const hourHeader = (y: number) =>
   [0, 6, 12, 18].map((h) => `<text x="${_HOURS_X + h * _D_STEP}" y="${y}">${hourLabel(h)}m</text>`).join('');
+
+// Every hour centered over its column ("12a 1 ... 11 12p 1 ... 11"). The 6-hour marks use the text
+// color and the current hour (`now` is "YYYY-MM-DD HH") the highlight color.
+function fullHourHeader(y: number, now: string) {
+  const current = Number(now.slice(11));
+  const labels: string[] = [];
+  for (let h = 0; h < 24; h++) {
+    const fill = h === current ? _COLORS.count : h % 6 === 0 ? _COLORS.text : '';
+    labels.push(`<text x="${_HOURS_X + h * _D_STEP + _D_CELL / 2}" y="${y}"${fill && ` fill="${fill}"`}>${h % 12 ? h % 12 : hourLabel(h)}</text>`);
+  }
+  return `<g font-size="10" text-anchor="middle">${labels.join('')}</g>`;
+}
 
 // Current month calendar (Sun-Sat columns) at the panel's left edge. Cells grow to fill the space
 // left of the week: as wide as the column allows, as tall as the week's 7 rows.
@@ -144,7 +167,9 @@ function monthBlock(days: Map<string, number>, today: string): string {
     }
     const n = days.get(date) ?? 0;
     total += n;
-    rects.push(dayRect(x, yPos, cell, _COLORS.levels[level(n)], `${plural(n)} on ${date}`));
+    const lvl = level(n);
+    rects.push(dayRect(x, yPos, cell, _COLORS.levels[lvl], `${plural(n)} on ${date}`));
+    rects.push(countText(x, yPos, cell, n, lvl));
     if (date === today) rects.push(todayRing(x, yPos, cell));
   }
   const header = ['S', 'M', 'T', 'W', 'T', 'F', 'S']
@@ -188,7 +213,7 @@ function dayBlock(hours: Map<string, number>, level: (n: number) => number, now:
   return `<line x1="${_PAD}" y1="${top}" x2="${_WIDTH - _PAD}" y2="${top}" stroke="${_COLORS.border}"/>
 ${label('Today', _PAD, cellsY - 8)}
 ${title(total, `commits on ${shortDate(now.slice(0, 10))}`, _PAD, cellsY + 13)}
-<g fill="${_COLORS.muted}">${hourHeader(cellsY - 8)}</g>
+<g fill="${_COLORS.muted}">${fullHourHeader(cellsY - 8, now)}</g>
 ${rects.join('\n')}`;
 }
 
