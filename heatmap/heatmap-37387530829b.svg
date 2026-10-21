@@ -590,8 +590,9 @@
 
 <rect x="356" y="140" width="16" height="16" rx="3" fill="#2A2A2A"><title>0 commits on 2026-10-21, 5am</title></rect>
 
-<rect x="354" y="138" width="20" height="20" rx="5" fill="none" stroke="#AC98C7" stroke-width="1.5"/>
-<rect x="376.5" y="140.5" width="15" height="15" rx="3" fill="none" stroke="#2A2A2A"/>
+<rect x="376" y="140" width="16" height="16" rx="3" fill="#2A2A2A"><title>0 commits on 2026-10-21, 6am</title></rect>
+
+<rect x="374" y="138" width="20" height="20" rx="5" fill="none" stroke="#AC98C7" stroke-width="1.5"/>
 <rect x="396.5" y="140.5" width="15" height="15" rx="3" fill="none" stroke="#2A2A2A"/>
 <rect x="416.5" y="140.5" width="15" height="15" rx="3" fill="none" stroke="#2A2A2A"/>
 <rect x="436.5" y="140.5" width="15" height="15" rx="3" fill="none" stroke="#2A2A2A"/>
@@ -684,7 +685,7 @@
 <line x1="16" y1="232" x2="732" y2="232" stroke="#3F3F3F"/>
 <text x="16" y="260" font-size="14" font-weight="600" fill="#FFFFFF">Today</text>
 <text x="16" y="282" font-size="14" fill="#D0D0D0"><tspan font-family="Consolas,'SFMono-Regular',Menlo,monospace" font-weight="600" fill="#F7E9B5">12</tspan> commits on Oct 21</text>
-<g fill="#888888"><g font-size="10" text-anchor="middle"><text x="29" y="306" fill="#D0D0D0">12am</text><text x="59" y="306">1:00</text><text x="89" y="306">2:00</text><text x="119" y="306">3:00</text><text x="149" y="306">4:00</text><text x="179" y="306" fill="#F7E9B5">5:00</text><text x="209" y="306" fill="#D0D0D0">6:00</text><text x="239" y="306">7:00</text><text x="269" y="306">8:00</text><text x="299" y="306">9:00</text><text x="329" y="306">10:00</text><text x="359" y="306">11:00</text><text x="389" y="306" fill="#D0D0D0">12pm</text><text x="419" y="306">1:00</text><text x="449" y="306">2:00</text><text x="479" y="306">3:00</text><text x="509" y="306">4:00</text><text x="539" y="306">5:00</text><text x="569" y="306" fill="#D0D0D0">6:00</text><text x="599" y="306">7:00</text><text x="629" y="306">8:00</text><text x="659" y="306">9:00</text><text x="689" y="306">10:00</text><text x="719" y="306">11:00</text></g></g>
+<g fill="#888888"><g font-size="10" text-anchor="middle"><text x="29" y="306" fill="#D0D0D0">12am</text><text x="59" y="306">1:00</text><text x="89" y="306">2:00</text><text x="119" y="306">3:00</text><text x="149" y="306">4:00</text><text x="179" y="306">5:00</text><text x="209" y="306" fill="#F7E9B5">6:00</text><text x="239" y="306">7:00</text><text x="269" y="306">8:00</text><text x="299" y="306">9:00</text><text x="329" y="306">10:00</text><text x="359" y="306">11:00</text><text x="389" y="306" fill="#D0D0D0">12pm</text><text x="419" y="306">1:00</text><text x="449" y="306">2:00</text><text x="479" y="306">3:00</text><text x="509" y="306">4:00</text><text x="539" y="306">5:00</text><text x="569" y="306" fill="#D0D0D0">6:00</text><text x="599" y="306">7:00</text><text x="629" y="306">8:00</text><text x="659" y="306">9:00</text><text x="689" y="306">10:00</text><text x="719" y="306">11:00</text></g></g>
 <rect x="16" y="314" width="26" height="20" rx="3" fill="#9986B7"><title>2 commits on 2026-10-21, 12am</title></rect>
 <text x="29" y="327.85" text-anchor="middle" font-family="Consolas,'SFMono-Regular',Menlo,monospace" font-size="11" font-weight="600" fill="#1B1B1B">2</text>
 <rect x="46" y="314" width="26" height="20" rx="3" fill="#2A2A2A"><title>0 commits on 2026-10-21, 1am</title></rect>
@@ -697,8 +698,9 @@
 
 <rect x="166" y="314" width="26" height="20" rx="3" fill="#2A2A2A"><title>0 commits on 2026-10-21, 5am</title></rect>
 
-<rect x="164" y="312" width="30" height="24" rx="5" fill="none" stroke="#AC98C7" stroke-width="1.5"/>
-<rect x="196.5" y="314.5" width="25" height="19" rx="3" fill="none" stroke="#2A2A2A"/>
+<rect x="196" y="314" width="26" height="20" rx="3" fill="#2A2A2A"><title>0 commits on 2026-10-21, 6am</title></rect>
+
+<rect x="194" y="312" width="30" height="24" rx="5" fill="none" stroke="#AC98C7" stroke-width="1.5"/>
 <rect x="226.5" y="314.5" width="25" height="19" rx="3" fill="none" stroke="#2A2A2A"/>
 <rect x="256.5" y="314.5" width="25" height="19" rx="3" fill="none" stroke="#2A2A2A"/>
 <rect x="286.5" y="314.5" width="25" height="19" rx="3" fill="none" stroke="#2A2A2A"/>
