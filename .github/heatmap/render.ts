@@ -5,8 +5,9 @@
 const _COLORS = {
   panel: '#1B1B1B', // AppBackground
   border: '#3F3F3F', // BorderSubtle
-  // ControlAlt for none, then even steps from a mid purple (fewest) to a light lavender (most).
-  levels: ['#2A2A2A', '#6B5491', '#7A659E', '#8A75AA', '#9986B7', '#A996C3', '#B8A7D0'],
+  // ControlAlt for none, then 8 even OKLCH lightness steps (0.38-0.96); chroma peaks mid-ramp and
+  // fades toward the near-white top.
+  levels: ['#2A2A2A', '#4E2F74', '#674198', '#7F58B9', '#9671D4', '#AD8EE9', '#C4AEF7', '#DBCEFF', '#F3EFFE'],
   focus: '#AC98C7', // Focus: marks today
   count: '#F7E9B5', // Highlight
   heading: '#FFFFFF', // PrimaryText: section labels
@@ -66,7 +67,7 @@ const dayRect = (x: number, y: number, size: number, fill: string, tip: string, 
 function countText(x: number, y: number, size: number, n: number, level: number, h = size) {
   if (n <= 0) return '';
   const font = size > _D_CELL ? 11 : n > 99 ? 7.5 : 9;
-  const fill = level >= 3 ? _COLORS.panel : _COLORS.heading;
+  const fill = level >= 4 ? _COLORS.panel : _COLORS.heading;
   return `<text x="${x + size / 2}" y="${y + h / 2 + font * 0.35}" text-anchor="middle" font-family="${_MONO}" font-size="${font}" font-weight="600" fill="${fill}">${n}</text>`;
 }
 
@@ -141,7 +142,7 @@ function hourRow(
 const hourHeader = (y: number) =>
   [0, 6, 12, 18].map((h) => `<text x="${_HOURS_X + h * _D_STEP}" y="${y}">${hourLabel(h)}m</text>`).join('');
 
-// Every hour centered over today's columns ("12am 1:00 ... 11:00 12pm 1:00 ... 11:00"). The 6-hour
+// Every hour centered over today's columns ("12am 1am ... 11am 12pm 1pm ... 11pm"). The 6-hour
 // marks use the text color and the current hour (`now` is "YYYY-MM-DD HH") the highlight color.
 function fullHourHeader(y: number, now: string) {
   const current = Number(now.slice(11));
@@ -149,7 +150,7 @@ function fullHourHeader(y: number, now: string) {
   for (let h = 0; h < 24; h++) {
     const fill = h === current ? _COLORS.count : h % 6 === 0 ? _COLORS.text : '';
     const x = _DAY_COLS.x + h * _DAY_COLS.step + _DAY_COLS.width / 2;
-    labels.push(`<text x="${x}" y="${y}"${fill && ` fill="${fill}"`}>${h % 12 ? `${h % 12}:00` : `${hourLabel(h)}m`}</text>`);
+    labels.push(`<text x="${x}" y="${y}"${fill && ` fill="${fill}"`}>${hourLabel(h)}m</text>`);
   }
   return `<g font-size="10" text-anchor="middle">${labels.join('')}</g>`;
 }
