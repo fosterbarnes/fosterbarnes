@@ -107,10 +107,10 @@ const _WEEK_X = _HOURS_X - 32; // Week title and day labels.
 const _W_DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
 // Hour column layouts: the week's square cells, and today's row stretched across the full panel.
-type HourCols = { x: number; step: number; width: number };
-const _WEEK_COLS: HourCols = { x: _HOURS_X, step: _D_STEP, width: _D_CELL };
+type HourCols = { x: number; step: number; width: number; height: number };
+const _WEEK_COLS: HourCols = { x: _HOURS_X, step: _D_STEP, width: _D_CELL, height: _D_CELL };
 const _DAY_STEP = (_WIDTH - 2 * _PAD + _D_STEP - _D_CELL) / 24;
-const _DAY_COLS: HourCols = { x: _PAD, step: _DAY_STEP, width: _DAY_STEP - (_D_STEP - _D_CELL) };
+const _DAY_COLS: HourCols = { x: _PAD, step: _DAY_STEP, width: _DAY_STEP - (_D_STEP - _D_CELL), height: 20 };
 
 // One row of 24 hour cells for `date`; hours after `now` ("YYYY-MM-DD HH") show as outlines.
 function hourRow(
@@ -122,15 +122,15 @@ function hourRow(
     const key = `${date} ${String(h).padStart(2, '0')}`;
     const x = cols.x + h * cols.step;
     if (key > now) {
-      rects.push(futureRect(x, y, cols.width, _D_CELL));
+      rects.push(futureRect(x, y, cols.width, cols.height));
       continue;
     }
     const n = hours.get(key) ?? 0;
     total += n;
     const lvl = level(n);
-    rects.push(dayRect(x, y, cols.width, _COLORS.levels[lvl], `${plural(n)} on ${date}, ${hourLabel(h)}m`, _D_CELL));
-    rects.push(countText(x, y, cols.width, n, lvl, _D_CELL));
-    if (key === now) rects.push(todayRing(x, y, cols.width, _D_CELL));
+    rects.push(dayRect(x, y, cols.width, _COLORS.levels[lvl], `${plural(n)} on ${date}, ${hourLabel(h)}m`, cols.height));
+    rects.push(countText(x, y, cols.width, n, lvl, cols.height));
+    if (key === now) rects.push(todayRing(x, y, cols.width, cols.height));
   }
   return { rects, total };
 }
@@ -238,7 +238,7 @@ function detailSection(days: Map<string, number>, hours: Map<string, number>, no
   const body = `${monthBlock(days, now.slice(0, 10))}
 ${weekBlock(hours, level, now)}
 ${dayBlock(hours, level, now, divider)}`;
-  return { body, height: divider + _DAY_CELLS_Y + _D_CELL + _PAD };
+  return { body, height: divider + _DAY_CELLS_Y + _DAY_COLS.height + _PAD };
 }
 
 // One panel: the year grid on top, then month/week/day below a divider.
