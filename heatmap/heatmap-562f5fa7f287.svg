@@ -379,47 +379,47 @@
 <text x="16" y="50" font-size="14" fill="#D0D0D0"><tspan font-family="Consolas,'SFMono-Regular',Menlo,monospace" font-weight="600" fill="#F7E9B5">160</tspan> commits in Oct 2026</text>
 <g fill="#888888"><text x="27" y="72" text-anchor="middle">S</text><text x="53" y="72" text-anchor="middle">M</text><text x="79" y="72" text-anchor="middle">T</text><text x="105" y="72" text-anchor="middle">W</text><text x="131" y="72" text-anchor="middle">T</text><text x="157" y="72" text-anchor="middle">F</text><text x="183" y="72" text-anchor="middle">S</text></g>
 <rect x="120" y="80" width="22" height="22" rx="3" fill="#AC98C7"><title>5 commits on 2026-10-01</title></rect>
-<text x="131" y="94.85" text-anchor="middle" font-family="Consolas,'SFMono-Regular',Menlo,monospace" font-size="11" fill="#1B1B1B">5</text>
+<text x="131" y="94.85" text-anchor="middle" font-family="Consolas,'SFMono-Regular',Menlo,monospace" font-size="11" font-weight="600" fill="#1B1B1B">5</text>
 <rect x="146" y="80" width="22" height="22" rx="3" fill="#AC98C7"><title>8 commits on 2026-10-02</title></rect>
-<text x="157" y="94.85" text-anchor="middle" font-family="Consolas,'SFMono-Regular',Menlo,monospace" font-size="11" fill="#1B1B1B">8</text>
+<text x="157" y="94.85" text-anchor="middle" font-family="Consolas,'SFMono-Regular',Menlo,monospace" font-size="11" font-weight="600" fill="#1B1B1B">8</text>
 <rect x="172" y="80" width="22" height="22" rx="3" fill="#AC98C7"><title>7 commits on 2026-10-03</title></rect>
-<text x="183" y="94.85" text-anchor="middle" font-family="Consolas,'SFMono-Regular',Menlo,monospace" font-size="11" fill="#1B1B1B">7</text>
+<text x="183" y="94.85" text-anchor="middle" font-family="Consolas,'SFMono-Regular',Menlo,monospace" font-size="11" font-weight="600" fill="#1B1B1B">7</text>
 <rect x="16" y="106" width="22" height="22" rx="3" fill="#AC98C7"><title>4 commits on 2026-10-04</title></rect>
-<text x="27" y="120.85" text-anchor="middle" font-family="Consolas,'SFMono-Regular',Menlo,monospace" font-size="11" fill="#1B1B1B">4</text>
+<text x="27" y="120.85" text-anchor="middle" font-family="Consolas,'SFMono-Regular',Menlo,monospace" font-size="11" font-weight="600" fill="#1B1B1B">4</text>
 <rect x="42" y="106" width="22" height="22" rx="3" fill="#AC98C7"><title>4 commits on 2026-10-05</title></rect>
-<text x="53" y="120.85" text-anchor="middle" font-family="Consolas,'SFMono-Regular',Menlo,monospace" font-size="11" fill="#1B1B1B">4</text>
+<text x="53" y="120.85" text-anchor="middle" font-family="Consolas,'SFMono-Regular',Menlo,monospace" font-size="11" font-weight="600" fill="#1B1B1B">4</text>
 <rect x="68" y="106" width="22" height="22" rx="3" fill="#AC98C7"><title>12 commits on 2026-10-06</title></rect>
-<text x="79" y="120.85" text-anchor="middle" font-family="Consolas,'SFMono-Regular',Menlo,monospace" font-size="11" fill="#1B1B1B">12</text>
+<text x="79" y="120.85" text-anchor="middle" font-family="Consolas,'SFMono-Regular',Menlo,monospace" font-size="11" font-weight="600" fill="#1B1B1B">12</text>
 <rect x="94" y="106" width="22" height="22" rx="3" fill="#4D3C64"><title>1 commit on 2026-10-07</title></rect>
-<text x="105" y="120.85" text-anchor="middle" font-family="Consolas,'SFMono-Regular',Menlo,monospace" font-size="11" fill="#FFFFFF">1</text>
+<text x="105" y="120.85" text-anchor="middle" font-family="Consolas,'SFMono-Regular',Menlo,monospace" font-size="11" font-weight="600" fill="#FFFFFF">1</text>
 <rect x="120" y="106" width="22" height="22" rx="3" fill="#AC98C7"><title>23 commits on 2026-10-08</title></rect>
-<text x="131" y="120.85" text-anchor="middle" font-family="Consolas,'SFMono-Regular',Menlo,monospace" font-size="11" fill="#1B1B1B">23</text>
+<text x="131" y="120.85" text-anchor="middle" font-family="Consolas,'SFMono-Regular',Menlo,monospace" font-size="11" font-weight="600" fill="#1B1B1B">23</text>
 <rect x="146" y="106" width="22" height="22" rx="3" fill="#4D3C64"><title>1 commit on 2026-10-09</title></rect>
-<text x="157" y="120.85" text-anchor="middle" font-family="Consolas,'SFMono-Regular',Menlo,monospace" font-size="11" fill="#FFFFFF">1</text>
+<text x="157" y="120.85" text-anchor="middle" font-family="Consolas,'SFMono-Regular',Menlo,monospace" font-size="11" font-weight="600" fill="#FFFFFF">1</text>
 <rect x="172" y="106" width="22" height="22" rx="3" fill="#9373C0"><title>3 commits on 2026-10-10</title></rect>
-<text x="183" y="120.85" text-anchor="middle" font-family="Consolas,'SFMono-Regular',Menlo,monospace" font-size="11" fill="#1B1B1B">3</text>
+<text x="183" y="120.85" text-anchor="middle" font-family="Consolas,'SFMono-Regular',Menlo,monospace" font-size="11" font-weight="600" fill="#1B1B1B">3</text>
 <rect x="16" y="132" width="22" height="22" rx="3" fill="#AC98C7"><title>4 commits on 2026-10-11</title></rect>
-<text x="27" y="146.85" text-anchor="middle" font-family="Consolas,'SFMono-Regular',Menlo,monospace" font-size="11" fill="#1B1B1B">4</text>
+<text x="27" y="146.85" text-anchor="middle" font-family="Consolas,'SFMono-Regular',Menlo,monospace" font-size="11" font-weight="600" fill="#1B1B1B">4</text>
 <rect x="42" y="132" width="22" height="22" rx="3" fill="#AC98C7"><title>4 commits on 2026-10-12</title></rect>
-<text x="53" y="146.85" text-anchor="middle" font-family="Consolas,'SFMono-Regular',Menlo,monospace" font-size="11" fill="#1B1B1B">4</text>
+<text x="53" y="146.85" text-anchor="middle" font-family="Consolas,'SFMono-Regular',Menlo,monospace" font-size="11" font-weight="600" fill="#1B1B1B">4</text>
 <rect x="68" y="132" width="22" height="22" rx="3" fill="#AC98C7"><title>8 commits on 2026-10-13</title></rect>
-<text x="79" y="146.85" text-anchor="middle" font-family="Consolas,'SFMono-Regular',Menlo,monospace" font-size="11" fill="#1B1B1B">8</text>
+<text x="79" y="146.85" text-anchor="middle" font-family="Consolas,'SFMono-Regular',Menlo,monospace" font-size="11" font-weight="600" fill="#1B1B1B">8</text>
 <rect x="94" y="132" width="22" height="22" rx="3" fill="#AC98C7"><title>17 commits on 2026-10-14</title></rect>
-<text x="105" y="146.85" text-anchor="middle" font-family="Consolas,'SFMono-Regular',Menlo,monospace" font-size="11" fill="#1B1B1B">17</text>
+<text x="105" y="146.85" text-anchor="middle" font-family="Consolas,'SFMono-Regular',Menlo,monospace" font-size="11" font-weight="600" fill="#1B1B1B">17</text>
 <rect x="120" y="132" width="22" height="22" rx="3" fill="#AC98C7"><title>13 commits on 2026-10-15</title></rect>
-<text x="131" y="146.85" text-anchor="middle" font-family="Consolas,'SFMono-Regular',Menlo,monospace" font-size="11" fill="#1B1B1B">13</text>
+<text x="131" y="146.85" text-anchor="middle" font-family="Consolas,'SFMono-Regular',Menlo,monospace" font-size="11" font-weight="600" fill="#1B1B1B">13</text>
 <rect x="146" y="132" width="22" height="22" rx="3" fill="#AC98C7"><title>10 commits on 2026-10-16</title></rect>
-<text x="157" y="146.85" text-anchor="middle" font-family="Consolas,'SFMono-Regular',Menlo,monospace" font-size="11" fill="#1B1B1B">10</text>
+<text x="157" y="146.85" text-anchor="middle" font-family="Consolas,'SFMono-Regular',Menlo,monospace" font-size="11" font-weight="600" fill="#1B1B1B">10</text>
 <rect x="172" y="132" width="22" height="22" rx="3" fill="#4D3C64"><title>1 commit on 2026-10-17</title></rect>
-<text x="183" y="146.85" text-anchor="middle" font-family="Consolas,'SFMono-Regular',Menlo,monospace" font-size="11" fill="#FFFFFF">1</text>
+<text x="183" y="146.85" text-anchor="middle" font-family="Consolas,'SFMono-Regular',Menlo,monospace" font-size="11" font-weight="600" fill="#FFFFFF">1</text>
 <rect x="16" y="158" width="22" height="22" rx="3" fill="#AC98C7"><title>5 commits on 2026-10-18</title></rect>
-<text x="27" y="172.85" text-anchor="middle" font-family="Consolas,'SFMono-Regular',Menlo,monospace" font-size="11" fill="#1B1B1B">5</text>
+<text x="27" y="172.85" text-anchor="middle" font-family="Consolas,'SFMono-Regular',Menlo,monospace" font-size="11" font-weight="600" fill="#1B1B1B">5</text>
 <rect x="42" y="158" width="22" height="22" rx="3" fill="#AC98C7"><title>9 commits on 2026-10-19</title></rect>
-<text x="53" y="172.85" text-anchor="middle" font-family="Consolas,'SFMono-Regular',Menlo,monospace" font-size="11" fill="#1B1B1B">9</text>
+<text x="53" y="172.85" text-anchor="middle" font-family="Consolas,'SFMono-Regular',Menlo,monospace" font-size="11" font-weight="600" fill="#1B1B1B">9</text>
 <rect x="68" y="158" width="22" height="22" rx="3" fill="#AC98C7"><title>15 commits on 2026-10-20</title></rect>
-<text x="79" y="172.85" text-anchor="middle" font-family="Consolas,'SFMono-Regular',Menlo,monospace" font-size="11" fill="#1B1B1B">15</text>
+<text x="79" y="172.85" text-anchor="middle" font-family="Consolas,'SFMono-Regular',Menlo,monospace" font-size="11" font-weight="600" fill="#1B1B1B">15</text>
 <rect x="94" y="158" width="22" height="22" rx="3" fill="#AC98C7"><title>6 commits on 2026-10-21</title></rect>
-<text x="105" y="172.85" text-anchor="middle" font-family="Consolas,'SFMono-Regular',Menlo,monospace" font-size="11" fill="#1B1B1B">6</text>
+<text x="105" y="172.85" text-anchor="middle" font-family="Consolas,'SFMono-Regular',Menlo,monospace" font-size="11" font-weight="600" fill="#1B1B1B">6</text>
 <rect x="92" y="156" width="26" height="26" rx="5" fill="none" stroke="#AC98C7" stroke-width="1.5"/>
 <rect x="120.5" y="158.5" width="21" height="21" rx="3" fill="none" stroke="#2A2A2A"/>
 <rect x="146.5" y="158.5" width="21" height="21" rx="3" fill="none" stroke="#2A2A2A"/>
@@ -437,7 +437,7 @@
 <rect x="256" y="80" width="16" height="16" rx="3" fill="#2A2A2A"><title>0 commits on 2026-10-18, 12am</title></rect>
 
 <rect x="276" y="80" width="16" height="16" rx="3" fill="#4D3C64"><title>1 commit on 2026-10-18, 1am</title></rect>
-<text x="284" y="91.15" text-anchor="middle" font-family="Consolas,'SFMono-Regular',Menlo,monospace" font-size="9" fill="#FFFFFF">1</text>
+<text x="284" y="91.15" text-anchor="middle" font-family="Consolas,'SFMono-Regular',Menlo,monospace" font-size="9" font-weight="600" fill="#FFFFFF">1</text>
 <rect x="296" y="80" width="16" height="16" rx="3" fill="#2A2A2A"><title>0 commits on 2026-10-18, 2am</title></rect>
 
 <rect x="316" y="80" width="16" height="16" rx="3" fill="#2A2A2A"><title>0 commits on 2026-10-18, 3am</title></rect>
@@ -463,7 +463,7 @@
 <rect x="516" y="80" width="16" height="16" rx="3" fill="#2A2A2A"><title>0 commits on 2026-10-18, 1pm</title></rect>
 
 <rect x="536" y="80" width="16" height="16" rx="3" fill="#4D3C64"><title>1 commit on 2026-10-18, 2pm</title></rect>
-<text x="544" y="91.15" text-anchor="middle" font-family="Consolas,'SFMono-Regular',Menlo,monospace" font-size="9" fill="#FFFFFF">1</text>
+<text x="544" y="91.15" text-anchor="middle" font-family="Consolas,'SFMono-Regular',Menlo,monospace" font-size="9" font-weight="600" fill="#FFFFFF">1</text>
 <rect x="556" y="80" width="16" height="16" rx="3" fill="#2A2A2A"><title>0 commits on 2026-10-18, 3pm</title></rect>
 
 <rect x="576" y="80" width="16" height="16" rx="3" fill="#2A2A2A"><title>0 commits on 2026-10-18, 4pm</title></rect>
@@ -471,9 +471,9 @@
 <rect x="596" y="80" width="16" height="16" rx="3" fill="#2A2A2A"><title>0 commits on 2026-10-18, 5pm</title></rect>
 
 <rect x="616" y="80" width="16" height="16" rx="3" fill="#4D3C64"><title>1 commit on 2026-10-18, 6pm</title></rect>
-<text x="624" y="91.15" text-anchor="middle" font-family="Consolas,'SFMono-Regular',Menlo,monospace" font-size="9" fill="#FFFFFF">1</text>
+<text x="624" y="91.15" text-anchor="middle" font-family="Consolas,'SFMono-Regular',Menlo,monospace" font-size="9" font-weight="600" fill="#FFFFFF">1</text>
 <rect x="636" y="80" width="16" height="16" rx="3" fill="#4D3C64"><title>1 commit on 2026-10-18, 7pm</title></rect>
-<text x="644" y="91.15" text-anchor="middle" font-family="Consolas,'SFMono-Regular',Menlo,monospace" font-size="9" fill="#FFFFFF">1</text>
+<text x="644" y="91.15" text-anchor="middle" font-family="Consolas,'SFMono-Regular',Menlo,monospace" font-size="9" font-weight="600" fill="#FFFFFF">1</text>
 <rect x="656" y="80" width="16" height="16" rx="3" fill="#2A2A2A"><title>0 commits on 2026-10-18, 8pm</title></rect>
 
 <rect x="676" y="80" width="16" height="16" rx="3" fill="#2A2A2A"><title>0 commits on 2026-10-18, 9pm</title></rect>
@@ -481,13 +481,13 @@
 <rect x="696" y="80" width="16" height="16" rx="3" fill="#2A2A2A"><title>0 commits on 2026-10-18, 10pm</title></rect>
 
 <rect x="716" y="80" width="16" height="16" rx="3" fill="#4D3C64"><title>1 commit on 2026-10-18, 11pm</title></rect>
-<text x="724" y="91.15" text-anchor="middle" font-family="Consolas,'SFMono-Regular',Menlo,monospace" font-size="9" fill="#FFFFFF">1</text>
+<text x="724" y="91.15" text-anchor="middle" font-family="Consolas,'SFMono-Regular',Menlo,monospace" font-size="9" font-weight="600" fill="#FFFFFF">1</text>
 <rect x="256" y="100" width="16" height="16" rx="3" fill="#4D3C64"><title>1 commit on 2026-10-19, 12am</title></rect>
-<text x="264" y="111.15" text-anchor="middle" font-family="Consolas,'SFMono-Regular',Menlo,monospace" font-size="9" fill="#FFFFFF">1</text>
+<text x="264" y="111.15" text-anchor="middle" font-family="Consolas,'SFMono-Regular',Menlo,monospace" font-size="9" font-weight="600" fill="#FFFFFF">1</text>
 <rect x="276" y="100" width="16" height="16" rx="3" fill="#4D3C64"><title>1 commit on 2026-10-19, 1am</title></rect>
-<text x="284" y="111.15" text-anchor="middle" font-family="Consolas,'SFMono-Regular',Menlo,monospace" font-size="9" fill="#FFFFFF">1</text>
+<text x="284" y="111.15" text-anchor="middle" font-family="Consolas,'SFMono-Regular',Menlo,monospace" font-size="9" font-weight="600" fill="#FFFFFF">1</text>
 <rect x="296" y="100" width="16" height="16" rx="3" fill="#9373C0"><title>2 commits on 2026-10-19, 2am</title></rect>
-<text x="304" y="111.15" text-anchor="middle" font-family="Consolas,'SFMono-Regular',Menlo,monospace" font-size="9" fill="#1B1B1B">2</text>
+<text x="304" y="111.15" text-anchor="middle" font-family="Consolas,'SFMono-Regular',Menlo,monospace" font-size="9" font-weight="600" fill="#1B1B1B">2</text>
 <rect x="316" y="100" width="16" height="16" rx="3" fill="#2A2A2A"><title>0 commits on 2026-10-19, 3am</title></rect>
 
 <rect x="336" y="100" width="16" height="16" rx="3" fill="#2A2A2A"><title>0 commits on 2026-10-19, 4am</title></rect>
@@ -523,17 +523,17 @@
 <rect x="636" y="100" width="16" height="16" rx="3" fill="#2A2A2A"><title>0 commits on 2026-10-19, 7pm</title></rect>
 
 <rect x="656" y="100" width="16" height="16" rx="3" fill="#4D3C64"><title>1 commit on 2026-10-19, 8pm</title></rect>
-<text x="664" y="111.15" text-anchor="middle" font-family="Consolas,'SFMono-Regular',Menlo,monospace" font-size="9" fill="#FFFFFF">1</text>
+<text x="664" y="111.15" text-anchor="middle" font-family="Consolas,'SFMono-Regular',Menlo,monospace" font-size="9" font-weight="600" fill="#FFFFFF">1</text>
 <rect x="676" y="100" width="16" height="16" rx="3" fill="#9373C0"><title>2 commits on 2026-10-19, 9pm</title></rect>
-<text x="684" y="111.15" text-anchor="middle" font-family="Consolas,'SFMono-Regular',Menlo,monospace" font-size="9" fill="#1B1B1B">2</text>
+<text x="684" y="111.15" text-anchor="middle" font-family="Consolas,'SFMono-Regular',Menlo,monospace" font-size="9" font-weight="600" fill="#1B1B1B">2</text>
 <rect x="696" y="100" width="16" height="16" rx="3" fill="#2A2A2A"><title>0 commits on 2026-10-19, 10pm</title></rect>
 
 <rect x="716" y="100" width="16" height="16" rx="3" fill="#9373C0"><title>2 commits on 2026-10-19, 11pm</title></rect>
-<text x="724" y="111.15" text-anchor="middle" font-family="Consolas,'SFMono-Regular',Menlo,monospace" font-size="9" fill="#1B1B1B">2</text>
+<text x="724" y="111.15" text-anchor="middle" font-family="Consolas,'SFMono-Regular',Menlo,monospace" font-size="9" font-weight="600" fill="#1B1B1B">2</text>
 <rect x="256" y="120" width="16" height="16" rx="3" fill="#AC98C7"><title>3 commits on 2026-10-20, 12am</title></rect>
-<text x="264" y="131.15" text-anchor="middle" font-family="Consolas,'SFMono-Regular',Menlo,monospace" font-size="9" fill="#1B1B1B">3</text>
+<text x="264" y="131.15" text-anchor="middle" font-family="Consolas,'SFMono-Regular',Menlo,monospace" font-size="9" font-weight="600" fill="#1B1B1B">3</text>
 <rect x="276" y="120" width="16" height="16" rx="3" fill="#4D3C64"><title>1 commit on 2026-10-20, 1am</title></rect>
-<text x="284" y="131.15" text-anchor="middle" font-family="Consolas,'SFMono-Regular',Menlo,monospace" font-size="9" fill="#FFFFFF">1</text>
+<text x="284" y="131.15" text-anchor="middle" font-family="Consolas,'SFMono-Regular',Menlo,monospace" font-size="9" font-weight="600" fill="#FFFFFF">1</text>
 <rect x="296" y="120" width="16" height="16" rx="3" fill="#2A2A2A"><title>0 commits on 2026-10-20, 2am</title></rect>
 
 <rect x="316" y="120" width="16" height="16" rx="3" fill="#2A2A2A"><title>0 commits on 2026-10-20, 3am</title></rect>
@@ -565,25 +565,25 @@
 <rect x="576" y="120" width="16" height="16" rx="3" fill="#2A2A2A"><title>0 commits on 2026-10-20, 4pm</title></rect>
 
 <rect x="596" y="120" width="16" height="16" rx="3" fill="#9373C0"><title>2 commits on 2026-10-20, 5pm</title></rect>
-<text x="604" y="131.15" text-anchor="middle" font-family="Consolas,'SFMono-Regular',Menlo,monospace" font-size="9" fill="#1B1B1B">2</text>
+<text x="604" y="131.15" text-anchor="middle" font-family="Consolas,'SFMono-Regular',Menlo,monospace" font-size="9" font-weight="600" fill="#1B1B1B">2</text>
 <rect x="616" y="120" width="16" height="16" rx="3" fill="#9373C0"><title>2 commits on 2026-10-20, 6pm</title></rect>
-<text x="624" y="131.15" text-anchor="middle" font-family="Consolas,'SFMono-Regular',Menlo,monospace" font-size="9" fill="#1B1B1B">2</text>
+<text x="624" y="131.15" text-anchor="middle" font-family="Consolas,'SFMono-Regular',Menlo,monospace" font-size="9" font-weight="600" fill="#1B1B1B">2</text>
 <rect x="636" y="120" width="16" height="16" rx="3" fill="#4D3C64"><title>1 commit on 2026-10-20, 7pm</title></rect>
-<text x="644" y="131.15" text-anchor="middle" font-family="Consolas,'SFMono-Regular',Menlo,monospace" font-size="9" fill="#FFFFFF">1</text>
+<text x="644" y="131.15" text-anchor="middle" font-family="Consolas,'SFMono-Regular',Menlo,monospace" font-size="9" font-weight="600" fill="#FFFFFF">1</text>
 <rect x="656" y="120" width="16" height="16" rx="3" fill="#4D3C64"><title>1 commit on 2026-10-20, 8pm</title></rect>
-<text x="664" y="131.15" text-anchor="middle" font-family="Consolas,'SFMono-Regular',Menlo,monospace" font-size="9" fill="#FFFFFF">1</text>
+<text x="664" y="131.15" text-anchor="middle" font-family="Consolas,'SFMono-Regular',Menlo,monospace" font-size="9" font-weight="600" fill="#FFFFFF">1</text>
 <rect x="676" y="120" width="16" height="16" rx="3" fill="#4D3C64"><title>1 commit on 2026-10-20, 9pm</title></rect>
-<text x="684" y="131.15" text-anchor="middle" font-family="Consolas,'SFMono-Regular',Menlo,monospace" font-size="9" fill="#FFFFFF">1</text>
+<text x="684" y="131.15" text-anchor="middle" font-family="Consolas,'SFMono-Regular',Menlo,monospace" font-size="9" font-weight="600" fill="#FFFFFF">1</text>
 <rect x="696" y="120" width="16" height="16" rx="3" fill="#2A2A2A"><title>0 commits on 2026-10-20, 10pm</title></rect>
 
 <rect x="716" y="120" width="16" height="16" rx="3" fill="#AC98C7"><title>4 commits on 2026-10-20, 11pm</title></rect>
-<text x="724" y="131.15" text-anchor="middle" font-family="Consolas,'SFMono-Regular',Menlo,monospace" font-size="9" fill="#1B1B1B">4</text>
+<text x="724" y="131.15" text-anchor="middle" font-family="Consolas,'SFMono-Regular',Menlo,monospace" font-size="9" font-weight="600" fill="#1B1B1B">4</text>
 <rect x="256" y="140" width="16" height="16" rx="3" fill="#9373C0"><title>2 commits on 2026-10-21, 12am</title></rect>
-<text x="264" y="151.15" text-anchor="middle" font-family="Consolas,'SFMono-Regular',Menlo,monospace" font-size="9" fill="#1B1B1B">2</text>
+<text x="264" y="151.15" text-anchor="middle" font-family="Consolas,'SFMono-Regular',Menlo,monospace" font-size="9" font-weight="600" fill="#1B1B1B">2</text>
 <rect x="276" y="140" width="16" height="16" rx="3" fill="#2A2A2A"><title>0 commits on 2026-10-21, 1am</title></rect>
 
 <rect x="296" y="140" width="16" height="16" rx="3" fill="#AC98C7"><title>4 commits on 2026-10-21, 2am</title></rect>
-<text x="304" y="151.15" text-anchor="middle" font-family="Consolas,'SFMono-Regular',Menlo,monospace" font-size="9" fill="#1B1B1B">4</text>
+<text x="304" y="151.15" text-anchor="middle" font-family="Consolas,'SFMono-Regular',Menlo,monospace" font-size="9" font-weight="600" fill="#1B1B1B">4</text>
 <rect x="294" y="138" width="20" height="20" rx="5" fill="none" stroke="#AC98C7" stroke-width="1.5"/>
 <rect x="316.5" y="140.5" width="15" height="15" rx="3" fill="none" stroke="#2A2A2A"/>
 <rect x="336.5" y="140.5" width="15" height="15" rx="3" fill="none" stroke="#2A2A2A"/>
@@ -683,11 +683,11 @@
 <text x="16" y="277" font-size="14" fill="#D0D0D0"><tspan font-family="Consolas,'SFMono-Regular',Menlo,monospace" font-weight="600" fill="#F7E9B5">6</tspan> commits on Oct 21</text>
 <g fill="#888888"><g font-size="10" text-anchor="middle"><text x="264" y="256" fill="#D0D0D0">12a</text><text x="284" y="256">1</text><text x="304" y="256" fill="#F7E9B5">2</text><text x="324" y="256">3</text><text x="344" y="256">4</text><text x="364" y="256">5</text><text x="384" y="256" fill="#D0D0D0">6</text><text x="404" y="256">7</text><text x="424" y="256">8</text><text x="444" y="256">9</text><text x="464" y="256">10</text><text x="484" y="256">11</text><text x="504" y="256" fill="#D0D0D0">12p</text><text x="524" y="256">1</text><text x="544" y="256">2</text><text x="564" y="256">3</text><text x="584" y="256">4</text><text x="604" y="256">5</text><text x="624" y="256" fill="#D0D0D0">6</text><text x="644" y="256">7</text><text x="664" y="256">8</text><text x="684" y="256">9</text><text x="704" y="256">10</text><text x="724" y="256">11</text></g></g>
 <rect x="256" y="264" width="16" height="16" rx="3" fill="#9373C0"><title>2 commits on 2026-10-21, 12am</title></rect>
-<text x="264" y="275.15" text-anchor="middle" font-family="Consolas,'SFMono-Regular',Menlo,monospace" font-size="9" fill="#1B1B1B">2</text>
+<text x="264" y="275.15" text-anchor="middle" font-family="Consolas,'SFMono-Regular',Menlo,monospace" font-size="9" font-weight="600" fill="#1B1B1B">2</text>
 <rect x="276" y="264" width="16" height="16" rx="3" fill="#2A2A2A"><title>0 commits on 2026-10-21, 1am</title></rect>
 
 <rect x="296" y="264" width="16" height="16" rx="3" fill="#AC98C7"><title>4 commits on 2026-10-21, 2am</title></rect>
-<text x="304" y="275.15" text-anchor="middle" font-family="Consolas,'SFMono-Regular',Menlo,monospace" font-size="9" fill="#1B1B1B">4</text>
+<text x="304" y="275.15" text-anchor="middle" font-family="Consolas,'SFMono-Regular',Menlo,monospace" font-size="9" font-weight="600" fill="#1B1B1B">4</text>
 <rect x="294" y="262" width="20" height="20" rx="5" fill="none" stroke="#AC98C7" stroke-width="1.5"/>
 <rect x="316.5" y="264.5" width="15" height="15" rx="3" fill="none" stroke="#2A2A2A"/>
 <rect x="336.5" y="264.5" width="15" height="15" rx="3" fill="none" stroke="#2A2A2A"/>
