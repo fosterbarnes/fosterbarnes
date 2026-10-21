@@ -64,7 +64,7 @@ function countText(x: number, y: number, size: number, n: number, level: number)
   if (n <= 0) return '';
   const font = size > _D_CELL ? 11 : n > 99 ? 7.5 : 9;
   const fill = level >= 3 ? _COLORS.panel : _COLORS.heading;
-  return `<text x="${x + size / 2}" y="${y + size / 2 + font * 0.35}" text-anchor="middle" font-family="${_MONO}" font-size="${font}" fill="${fill}">${n}</text>`;
+  return `<text x="${x + size / 2}" y="${y + size / 2 + font * 0.35}" text-anchor="middle" font-family="${_MONO}" font-size="${font}" font-weight="600" fill="${fill}">${n}</text>`;
 }
 
 const panel = (width: number, height: number) =>
