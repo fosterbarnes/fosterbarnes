@@ -5,7 +5,8 @@
 const _COLORS = {
   panel: '#1B1B1B', // AppBackground
   border: '#3F3F3F', // BorderSubtle
-  levels: ['#2A2A2A', '#4D3C64', '#765E98', '#9373C0', '#AC98C7'], // ControlAlt -> Focus
+  // ControlAlt for none, then even steps from a light lavender (fewest) to a mid purple (most).
+  levels: ['#2A2A2A', '#B8A7D0', '#9E8BBB', '#856FA6', '#6B5491'],
   focus: '#AC98C7', // Focus: marks today
   count: '#F7E9B5', // Highlight
   heading: '#FFFFFF', // PrimaryText: section labels
@@ -59,12 +60,12 @@ const plural = (n: number) => `${n} commit${n === 1 ? '' : 's'}`;
 const dayRect = (x: number, y: number, size: number, fill: string, tip: string, h = size) =>
   `<rect x="${x}" y="${y}" width="${size}" height="${h}" rx="${size > _CELL ? 3 : 2}" fill="${fill}"><title>${tip}</title></rect>`;
 
-// Commit count centered in a detail cell: dark text on the two light levels, none for zero. The README
+// Commit count centered in a detail cell: dark text on the two light (low) levels, none for zero. The README
 // shows the image through <img>, where <title> tooltips never appear, so counts must be drawn.
 function countText(x: number, y: number, size: number, n: number, level: number, h = size) {
   if (n <= 0) return '';
   const font = size > _D_CELL ? 11 : n > 99 ? 7.5 : 9;
-  const fill = level >= 3 ? _COLORS.panel : _COLORS.heading;
+  const fill = level <= 2 ? _COLORS.panel : _COLORS.heading;
   return `<text x="${x + size / 2}" y="${y + h / 2 + font * 0.35}" text-anchor="middle" font-family="${_MONO}" font-size="${font}" font-weight="600" fill="${fill}">${n}</text>`;
 }
 
