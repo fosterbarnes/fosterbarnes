@@ -5,9 +5,8 @@
 const _COLORS = {
   panel: '#1B1B1B', // AppBackground
   border: '#3F3F3F', // BorderSubtle
-  // ControlAlt for none, then 8 even OKLCH lightness steps (0.38-0.96); chroma peaks mid-ramp and
-  // fades toward the near-white top.
-  levels: ['#2A2A2A', '#4E2F74', '#674198', '#7F58B9', '#9671D4', '#AD8EE9', '#C4AEF7', '#DBCEFF', '#F3EFFE'],
+  // ControlAlt for none, then 8 even OKLCH steps from #665B77 to #B697E1.
+  levels: ['#2A2A2A', '#665B77', '#716385', '#7C6C94', '#8774A3', '#937DB2', '#9E85C2', '#AA8ED1', '#B697E1'],
   focus: '#AC98C7', // Focus: marks today
   count: '#F7E9B5', // Highlight
   heading: '#FFFFFF', // PrimaryText: section labels
