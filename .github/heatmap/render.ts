@@ -5,14 +5,74 @@
 const _COLORS = {
   panel: '#1B1B1B', // AppBackground
   border: '#3F3F3F', // BorderSubtle
-  // ControlAlt for none, then 8 even OKLCH steps from #665B77 to #B697E1.
-  levels: ['#2A2A2A', '#665B77', '#716385', '#7C6C94', '#8774A3', '#937DB2', '#9E85C2', '#AA8ED1', '#B697E1'],
+  none: '#2A2A2A', // ControlAlt: zero commits
+  low: '#372E45', // Level 1; `_LEVELS` fills in the steps up to `high`.
+  high: '#B697E1',
   focus: '#AC98C7', // Focus: marks today
   count: '#F7E9B5', // Highlight
   heading: '#FFFFFF', // PrimaryText: section labels
   text: '#D0D0D0', // SecondaryText
   muted: '#888888',
 };
+
+// sRGB <-> OKLCH, matrices from https://bottosson.github.io/posts/oklab/. OKLCH steps look evenly
+// spaced in lightness, unlike plain RGB mixing.
+type Oklch = [number, number, number];
+const toLinear = (c: number) => (c <= 0.04045 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4);
+const toGamma = (c: number) => (c <= 0.0031308 ? 12.92 * c : 1.055 * c ** (1 / 2.4) - 0.055);
+const linearRgb = (hex: string) => [1, 3, 5].map((i) => toLinear(parseInt(hex.slice(i, i + 2), 16) / 255));
+
+function toOklch(hex: string): Oklch {
+  const [r, g, b] = linearRgb(hex);
+  const l = Math.cbrt(0.4122214708 * r + 0.5363325363 * g + 0.0514459929 * b);
+  const m = Math.cbrt(0.2119034982 * r + 0.6806995451 * g + 0.1073969566 * b);
+  const s = Math.cbrt(0.0883024619 * r + 0.2817188376 * g + 0.6299787005 * b);
+  const a = 1.9779984951 * l - 2.428592205 * m + 0.4505937099 * s;
+  const bb = 0.0259040371 * l + 0.7827717662 * m - 0.808675766 * s;
+  return [0.2104542553 * l + 0.793617785 * m - 0.0040720468 * s, Math.hypot(a, bb), (Math.atan2(bb, a) * 180) / Math.PI];
+}
+
+function fromOklch([L, C, H]: Oklch): string {
+  const a = C * Math.cos((H * Math.PI) / 180);
+  const b = C * Math.sin((H * Math.PI) / 180);
+  const l = (L + 0.3963377774 * a + 0.2158037573 * b) ** 3;
+  const m = (L - 0.1055613458 * a - 0.0638541728 * b) ** 3;
+  const s = (L - 0.0894841775 * a - 1.291485548 * b) ** 3;
+  const rgb = [
+    4.0767416621 * l - 3.3077115913 * m + 0.2309699292 * s,
+    -1.2684380046 * l + 2.6097574011 * m - 0.3413193965 * s,
+    -0.0041960863 * l - 0.7034186147 * m + 1.707614701 * s,
+  ];
+  const byte = (c: number) => Math.round(Math.min(1, Math.max(0, toGamma(c))) * 255).toString(16).padStart(2, '0');
+  return `#${rgb.map(byte).join('').toUpperCase()}`;
+}
+
+// `steps` colors from `low` to `high` inclusive, hue taking the short way around the circle.
+function ramp(low: string, high: string, steps: number): string[] {
+  const [l0, c0, h0] = toOklch(low);
+  const [l1, c1, h1] = toOklch(high);
+  const dh = ((h1 - h0 + 540) % 360) - 180;
+  return Array.from({ length: steps }, (_, i) => {
+    const t = i / (steps - 1);
+    return fromOklch([l0 + (l1 - l0) * t, c0 + (c1 - c0) * t, h0 + dh * t]);
+  });
+}
+
+// WCAG contrast ratio between two hex colors.
+function contrast(x: string, y: string): number {
+  const lum = (hex: string) => {
+    const [r, g, b] = linearRgb(hex);
+    return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+  };
+  const [hi, lo] = [lum(x), lum(y)].sort((p, q) => q - p);
+  return (hi + 0.05) / (lo + 0.05);
+}
+
+// Level 0 is no commits; levels 1-8 run from `low` to `high`.
+const _LEVELS = [_COLORS.none, ...ramp(_COLORS.low, _COLORS.high, 8)];
+// Count text per level: white or panel-dark, whichever reads better on that cell.
+const _LEVEL_TEXT = _LEVELS.map((fill) =>
+  contrast(fill, _COLORS.heading) >= contrast(fill, _COLORS.panel) ? _COLORS.heading : _COLORS.panel);
 
 const _CELL = 10;
 const _STEP = 13; // Cell + 3px gap.
@@ -37,7 +97,7 @@ const dateRange = (from: string, to: string) =>
 function levelOf(counts: number[]): (n: number) => number {
   const sorted = counts.filter((n) => n > 0).sort((a, b) => a - b);
   const cap = Math.max(2, sorted[Math.floor((sorted.length - 1) * 0.95)] ?? 0);
-  const top = _COLORS.levels.length - 1;
+  const top = _LEVELS.length - 1;
   return (n) => (n <= 0 ? 0 : Math.min(top, 1 + Math.floor(((top - 1) * Math.log(n)) / Math.log(cap))));
 }
 
@@ -66,7 +126,7 @@ const dayRect = (x: number, y: number, size: number, fill: string, tip: string, 
 function countText(x: number, y: number, size: number, n: number, level: number, h = size) {
   if (n <= 0) return '';
   const font = size > _D_CELL ? 11 : n > 99 ? 7.5 : 9;
-  const fill = level >= 4 ? _COLORS.panel : _COLORS.heading;
+  const fill = _LEVEL_TEXT[level];
   return `<text x="${x + size / 2}" y="${y + h / 2 + font * 0.35}" text-anchor="middle" font-family="${_MONO}" font-size="${font}" font-weight="600" fill="${fill}">${n}</text>`;
 }
 
@@ -81,7 +141,7 @@ const svgOpen = (width: number, height: number) =>
 
 // Outline for a slot that hasn't happened yet.
 const futureRect = (x: number, y: number, size: number, h = size) =>
-  `<rect x="${x + 0.5}" y="${y + 0.5}" width="${size - 1}" height="${h - 1}" rx="3" fill="none" stroke="${_COLORS.levels[0]}"/>`;
+  `<rect x="${x + 0.5}" y="${y + 0.5}" width="${size - 1}" height="${h - 1}" rx="3" fill="none" stroke="${_COLORS.none}"/>`;
 
 // Ring just outside the current slot's cell; visible on every level color. Small year cells get a
 // tighter, thinner ring so it stays inside their 3px gap.
@@ -130,7 +190,7 @@ function hourRow(
     const n = hours.get(key) ?? 0;
     total += n;
     const lvl = level(n);
-    rects.push(dayRect(x, y, cols.width, _COLORS.levels[lvl], `${plural(n)} on ${date}, ${hourLabel(h)}m`, cols.height));
+    rects.push(dayRect(x, y, cols.width, _LEVELS[lvl], `${plural(n)} on ${date}, ${hourLabel(h)}m`, cols.height));
     rects.push(countText(x, y, cols.width, n, lvl, cols.height));
     if (key === now) rects.push(todayRing(x, y, cols.width, cols.height));
   }
@@ -180,7 +240,7 @@ function monthBlock(days: Map<string, number>, today: string): string {
     const n = days.get(date) ?? 0;
     total += n;
     const lvl = level(n);
-    rects.push(dayRect(x, yPos, cell, _COLORS.levels[lvl], `${plural(n)} on ${date}`));
+    rects.push(dayRect(x, yPos, cell, _LEVELS[lvl], `${plural(n)} on ${date}`));
     rects.push(countText(x, yPos, cell, n, lvl));
     if (date === today) rects.push(todayRing(x, yPos, cell));
   }
@@ -282,12 +342,12 @@ function yearSection(days: Map<string, number>, today: string): Section {
   const right = _WIDTH - _PAD;
   const legendY = _TOP + 7 * _STEP + 10;
   const height = legendY + _CELL + _PAD;
-  const legendX = (i: number) => right - 30 - _CELL - (_COLORS.levels.length - 1 - i) * _STEP;
-  const legend = _COLORS.levels
+  const legendX = (i: number) => right - 30 - _CELL - (_LEVELS.length - 1 - i) * _STEP;
+  const legend = _LEVELS
     .map((fill, i) => `<rect x="${legendX(i)}" y="${legendY}" width="${_CELL}" height="${_CELL}" rx="2" fill="${fill}"/>`)
     .join('');
   const rects = cells
-    .map((c) => dayRect(c.x, c.y, _CELL, _COLORS.levels[level(c.n)], `${plural(c.n)} on ${c.date}`)
+    .map((c) => dayRect(c.x, c.y, _CELL, _LEVELS[level(c.n)], `${plural(c.n)} on ${c.date}`)
       + (c.date === today ? todayRing(c.x, c.y, _CELL) : ''))
     .join('\n');
   const weekday = (label: string, row: number) => `<text x="${_PAD}" y="${_TOP + row * _STEP + 9}">${label}</text>`;
