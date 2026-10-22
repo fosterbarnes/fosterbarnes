@@ -303,13 +303,15 @@ ${dayBlock(hours, level, now, divider)}`;
   return { body, height: divider + _DAY_CELLS_Y + _DAY_COLS.height + _PAD };
 }
 
-// One panel: the year grid on top, then month/week/day below a divider.
-export function renderHeatmap(days: Map<string, number>, hours: Map<string, number>, now: string): string {
+// One panel: the year grid on top, then month/week/day below a divider. `zone` names the time zone
+// every date and hour is in; it sits top right on the year title row.
+export function renderHeatmap(days: Map<string, number>, hours: Map<string, number>, now: string, zone: string): string {
   const year = yearSection(days, now.slice(0, 10));
   const detail = detailSection(days, hours, now);
   const height = year.height + detail.height;
   return `${svgOpen(_WIDTH, height)}
 ${panel(_WIDTH, height)}
+<text x="${_WIDTH - _PAD}" y="${_PAD + 12}" text-anchor="end" fill="${_COLORS.muted}">${zone}</text>
 ${year.body}
 <line x1="${_PAD}" y1="${year.height}" x2="${_WIDTH - _PAD}" y2="${year.height}" stroke="${_COLORS.border}"/>
 <g transform="translate(0 ${year.height})">

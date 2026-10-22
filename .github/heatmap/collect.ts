@@ -105,6 +105,14 @@ export function hourKey(date: Date, timeZone: string): string {
   return `${dayKey(date, timeZone)} ${hour}`;
 }
 
+// Readable zone name and current offset, e.g. "Eastern Time (UTC-4)".
+export function zoneLabel(date: Date, timeZone: string): string {
+  const part = (timeZoneName: 'longGeneric' | 'shortOffset') =>
+    new Intl.DateTimeFormat('en-US', { timeZone, timeZoneName })
+      .formatToParts(date).find((p) => p.type === 'timeZoneName')!.value;
+  return `${part('longGeneric')} (${part('shortOffset').replace('GMT', 'UTC')})`;
+}
+
 // Per-key counts, e.g. `tally(commits, (d) => dayKey(d, tz))`.
 export function tally(commits: Date[], key: (d: Date) => string): Map<string, number> {
   const counts = new Map<string, number>();
