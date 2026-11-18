@@ -29,6 +29,13 @@ const _SRC = /src="heatmap\/[^"]+\.svg"/; // The README's heatmap <img>.
 const root = resolve(import.meta.dirname, '../..');
 const heatmapDir = join(root, 'heatmap');
 const readmePath = join(root, 'README.md');
+// A task started before Windows loads the user's profile gets no APPDATA (gh login), LOCALAPPDATA
+// (state, log), or USERPROFILE (git credential helper). Exit so the task's 5-minute relaunch retries.
+const missing = ['APPDATA', 'LOCALAPPDATA', 'USERPROFILE'].filter((k) => !process.env[k]);
+if (process.platform === 'win32' && missing.length) {
+  console.error(`No user profile environment (${missing.join(', ')} unset); exiting for relaunch`);
+  process.exit(1);
+}
 const stateDir = process.env.HEATMAP_STATE || join(process.env.LOCALAPPDATA ?? '.', 'heatmap');
 const statePath = join(stateDir, 'state.json');
 const logPath = join(stateDir, 'heatmap.log');

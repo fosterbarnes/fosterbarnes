@@ -44,6 +44,8 @@ pull before editing the README locally. Re-run `install.ps1` if your Windows pas
   run queues one follow-up run. A rejected push re-syncs and retries once; errors retry after 5 min.
 - No network at boot is fine: polls log the failure and keep retrying. The task also relaunches the
   watcher within 5 minutes if the process ever exits.
+- Started without the user's profile environment (seen after some reboots), it exits at once and
+  the 5-minute relaunch retries; the task shows last result 1 meanwhile.
 - State and log: `%LOCALAPPDATA%\heatmap\` (`state.json`, `heatmap.log`, rotated at 1 MB).
 - Each image is named after a hash of its content and the profile `README.md` points at it.
   GitHub serves the image from a URL with a 5 min cache and its redirect drops query strings
