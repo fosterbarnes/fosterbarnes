@@ -23,4 +23,4 @@ I enjoy making things & problem solving. I write software, make music, and strea
 
 ## Activity
 
-<p align="left"><img width="1000" alt="Commit heatmap: last year, this month, this week by hour, and today by hour" src="heatmap/heatmap-0210731aa567.svg"></p>
+<p align="left"><img width="1000" alt="Commit heatmap: last year, this month, this week by hour, and today by hour" src="heatmap/heatmap-50a225606a7c.svg"></p>
